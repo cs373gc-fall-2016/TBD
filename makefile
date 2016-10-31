@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := test
 
 FILES :=						\
-	IDB1.html					\
+	# IDB1.html					\
 	IDB1.log					
 
 ifeq ($(shell uname), Darwin)          # Apple
@@ -81,14 +81,20 @@ status:
 	git remote -v
 	git status
 
+# TODO
+TestApp:
+	python3.5 app/tests.py
 
 IDB1.log:
 	git log > IDB1.log
 
+# FIXME ImportError: No module named 'flask'
 IDB1.html:
 	pydoc3.5 app/views.py
 
-test: IDB1.html IDB1.log check
+test: IDB1.log check
+# TODO add reference to test
+# test: IDB1.html IDB1.log check
 
 versions:
 	which make

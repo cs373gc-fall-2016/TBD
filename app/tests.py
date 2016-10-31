@@ -154,6 +154,43 @@ class TestCity(TestCase):
         self.assertEqual(len(cities), 1)
         self.assertEqual(example.dictionary(), cities[1].dictionary)
 
+# ----
+# About
+# ----
+
+class TestAbout(TestCase):
+    # ------------------
+    # Setup and Teardown
+    # ------------------
+
+    def setUp():
+        db.create_all()
+
+    def tearDown():
+        db.session.close()
+        db.drop_all()
+
+    # ----
+    # About
+    # ----
+
+    def test_about(self):
+        # TODO
+        """
+        Test about page
+        """
+        example = City("Los Angeles", "CA", "USA", ["Space Exploration Technologies"], [], ["Elon Musk"])
+
+        self.assertEqual(example.state, "CA")
+        self.assertEqual(example.country, "USA")
+
+        db.session.add(example)
+        db.session.commit()
+        cities = City.query.all()
+
+        self.assertEqual(len(cities), 1)
+        self.assertEqual(example.dictionary(), cities[1].dictionary)
+
 
 # ----
 # main
