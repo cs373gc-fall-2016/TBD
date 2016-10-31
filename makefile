@@ -1,8 +1,8 @@
 .DEFAULT_GOAL := test
 
 FILES :=						\
-	IMDB1.html					\
-	IMDB1.log					\
+	IDB1.html					\
+	IDB1.log					
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
@@ -81,7 +81,14 @@ status:
 	git remote -v
 	git status
 
-test: IMDB1.html IMDB1.log check
+
+IDB1.log:
+	git log > IDB1.log
+
+IDB1.html:
+	pydoc3.5 app/views.py
+
+test: IDB1.html IDB1.log check
 
 versions:
 	which make
@@ -109,9 +116,3 @@ versions:
 	$(AUTOPEP8) --version
 	@echo
 	$(PIP) list
-
-IDB1.log:
-	git log > IDB1.log
-
-IDB1.html:
-	pydoc3.5 app/views.py
